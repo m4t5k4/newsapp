@@ -1,0 +1,30 @@
+<h1>Artikels</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Tag</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 45%">TagID</th>
+            <th style="width: 45%">Name</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tag of tags">
+            <td>{{tag.tagID}}</td>
+            <td>{{tag.name}}</td>
+            <td style="white-space: nowrap">
+                
+                <button (click)="deleteTag(tag.tagID)" class="btn btn-sm btn-danger btn-delete-article"
+                    [disabled]="tag.isDeleting">
+                    <span *ngIf="tag.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!tag.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!tags">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

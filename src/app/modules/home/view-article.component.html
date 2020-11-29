@@ -1,0 +1,20 @@
+<div class="card">
+    
+    <div class="card-body">
+        <img *ngIf="src" class="card-img-top" src="https://localhost:5001/{{src}}" style="max-width: 350px;"><br>
+        {{article.title}}<br><br>
+        {{article.subTitle}}<br><br>
+        {{article.shortSummary}}<br><br>
+        {{article.body}}<br><br>
+        <!-- {{article.tagID}}<br> -->
+        Geschreven door: {{user.firstName}} {{user.lastName}}
+    </div>
+</div>
+<div class="form-group">
+    <button *ngIf="loading" [disabled]="loading" class="btn btn-primary">
+        <span class="spinner-border spinner-border-sm mr-1"></span>
+        LIKE
+    </button>
+    <button mat-button class="active">Reageren</button>
+    <button mat-button routerLink="/dashboard" class="active">Terug</button>
+</div>

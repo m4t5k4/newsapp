@@ -1,0 +1,79 @@
+<h1 *ngIf="isAddMode">Artikel aanmaken</h1>
+<h1 *ngIf="!isAddMode">Artikel bewerken</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="title">Title</label>
+            <input type="text" formControlName="title" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                <div *ngIf="f.title.errors.required">Titel is verplicht</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="subTitle">SubTitle</label>
+            <input type="text" formControlName="subTitle" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.subTitle.errors }" />
+            <div *ngIf="submitted && f.subTitle.errors" class="invalid-feedback">
+                <div *ngIf="f.subTitle.errors.required">SubTitel is verplicht</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="shortSummary">ShortSummary</label>
+            <input type="text" formControlName="shortSummary" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.shortSummary.errors }" />
+            <div *ngIf="submitted && f.shortSummary.errors" class="invalid-feedback">
+                <div *ngIf="f.shortSummary.errors.required">ShortSummary is verplicht</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="body">Body</label>
+            <textarea type="text" formControlName="body" class="form-control md-textarea-auto"
+                [ngClass]="{ 'is-invalid': submitted && f.body.errors }"></textarea>
+            <div *ngIf="submitted && f.body.errors" class="invalid-feedback">
+                <div *ngIf="f.body.errors.required">Body is verplicht</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="status">Status</label>
+            <select name="status" formControlName="articleStatusID" class="form-control">
+                <option *ngFor="let status of articleStatus" value="{{status.value}}">{{status.viewValue}}</option>
+            </select>
+        </div>
+        <div class="form-group col">
+            <label for="tag">Tag</label>
+            <select name="tag" formControlName="tagID" class="form-control">
+                <option *ngFor="let tag of tags" value="{{tag.value}}">{{tag.viewValue}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="image">Image</label>
+            <span style="color:red;" *ngIf="message">{{message}}</span>
+            <input name="image" #inputFile #file type="file" accept='image/*' (change)="preview(file.files)" class="form-control"/>
+            <img [src]="imgURL" height="200" *ngIf="imgURL">
+        </div>
+        <div class="form-group col">
+            <a class="btn btn-link" (click)="upload(file.files)">upload foto naar api</a>
+            <a class="btn btn-link" (click)="delete()">verwijderen</a>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="imageID">imageID</label>
+            <input type="text" formControlName="imageID" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Opslaan
+        </button>
+        <a routerLink="/write" class="btn btn-link">Annuleren</a>
+    </div>
+</form>

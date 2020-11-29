@@ -1,0 +1,34 @@
+<h1>Mijn artikels</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Artikel maken</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 30%">Titel</th>
+            <th style="width: 30%">Tag</th>
+            <th style="width: 30%">Status</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let article of articles">
+            <td>{{article.title}}</td>
+            <td>{{article.tagID}}</td>
+            <td *ngIf="article.articleStatusID === 1">Published</td>
+            <td *ngIf="article.articleStatusID === 2">To Review</td>
+            <td *ngIf="article.articleStatusID === 3">Draft</td>
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{article.articleID}}" class="btn btn-sm btn-primary mr-1">Bewerken</a>
+                <button (click)="deleteArticle(article.articleID)" class="btn btn-sm btn-danger btn-delete-article"
+                    [disabled]="article.isDeleting">
+                    <span *ngIf="article.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!article.isDeleting">Verwijderen</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!articles">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

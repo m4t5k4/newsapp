@@ -1,0 +1,16 @@
+<div class="card-container">
+    <mat-card class="custom-card front">
+        <mat-card-content>
+            <img mat-card-image src="https://localhost:5001/{{src}}">
+        </mat-card-content>
+        <mat-card-header>
+            <mat-card-title>{{article.title}}</mat-card-title>
+            <mat-card-subtitle>{{article.subTitle}}</mat-card-subtitle>
+            <mat-card-subtitle>{{article.shortSummary}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+            <button class="active" mat-button>LIKE</button>
+            <button (click)="passArticle()" routerLink="{{article.articleID}}" class="active" mat-button>LEES VERDER</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

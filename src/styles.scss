@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'styles-variables';
+@import '~bootstrap/scss/bootstrap';
+@import 'style-reset';
+
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+@import './styles/themes/black-theme.scss';
+@import './styles/themes/light-theme.scss';
+
+.my-light-theme {
+  @include angular-material-theme($my-light-theme);
+}
+
+.my-dark-theme {
+  @include angular-material-theme($my-black-theme);
+}
+
+.footer {
+  width: 100%;
+  height: 50px;
+}
+
+.wrapper {
+  min-height: calc(100vh-50px);
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 30px;
+  padding-left: 30px;
+  max-width: 1440px; 
+}

@@ -1,0 +1,10 @@
+<div *ngIf="!articles">
+    <span class="spinner-border spinner-border-lg align-center"></span>
+</div>
+<div id="content" *ngIf="articles">
+    <ngx-masonry>
+        <div ngxMasonryItem class="masonry-item" *ngFor="let article of articles | async">
+            <app-item [article]="article"></app-item>
+        </div>
+    </ngx-masonry>
+</div>
